@@ -148,14 +148,11 @@ export const AccountSettings = ({ opened, setOpened, userId }: Props) => {
             <Form.Item label="Name" name="name">
               <Input placeholder="Name" />
             </Form.Item>
-            <Form.Item label="Email" name="email">
-              <Input placeholder="email" />
-            </Form.Item>
-            <Form.Item label="Job title" name="jobTitle">
-              <Input placeholder="jobTitle" />
-            </Form.Item>
             <Form.Item label="Phone" name="phone">
               <Input placeholder="Timezone" />
+            </Form.Item>
+            <Form.Item label="Email" name="email">
+              <Input placeholder="email" />
             </Form.Item>
           </Form>
           <SaveButton
