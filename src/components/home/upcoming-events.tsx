@@ -1,7 +1,6 @@
 import { CalendarOutlined } from '@ant-design/icons';
 import { Badge, Card, List } from 'antd';
 import { Text } from '../text';
-import { useState } from 'react';
 import { UESkeleton } from '..';
 import { getDate } from '@/utilities/helpers';
 import { useList } from '@refinedev/core';
@@ -10,8 +9,7 @@ import dayjs from 'dayjs';
 
 const UpcomingEvents = () => {
 
-    const [isLoading, setIsLoading] = useState(false);
-    const { data, isLoading: eventsLoading } = useList({
+    const { data, isLoading } = useList({
         resource: 'events',
         pagination: { pageSize: 5 },
         sorters: [
@@ -24,7 +22,7 @@ const UpcomingEvents = () => {
             { 
                 field: 'startDate',
                 operator: 'gte', // not like gta. It means greater than
-                value: dayjs().format('YYYY-MM-DD'),
+                value: dayjs().format('YYYY-MM-DD'), 
             }
         ],
         meta: {
@@ -75,15 +73,28 @@ const UpcomingEvents = () => {
                                     avatar={<Badge color={item.color} />}
                                     title={<Text size="xs">{renderDate}</Text>}
                                     description={<Text ellipsis={{ tooltip: true }} strong>
-                                        {item.description}
+                                        {item.title}
                                     </Text>}
                                 />
                             </List.Item>
                         )
                     }}
-                >
-                </List>
+                />
             )}
+
+            {!isLoading && data?.data.length === 0 && (
+                <span
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '220px',
+                    }}
+                >
+                    No Upcoming Events
+                </span>
+            )}
+
         </Card>
     )
 }
