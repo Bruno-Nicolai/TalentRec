@@ -5,8 +5,11 @@ import AccHdSkeleton from './skeleton/accordion-header';
 import KbColSkeleton from './skeleton/kanban';
 import ProjCardSkeleton from './skeleton/project-card';
 import LtActSkeleton from './skeleton/latest-activities';
+import DashboardTotalCountCard from './home/total-count-card'
 
 export { 
+
+    DashboardTotalCountCard,
     UpcomingEvents, 
     DealsChart, 
     
@@ -15,4 +18,5 @@ export {
     KbColSkeleton,
     ProjCardSkeleton,
     LtActSkeleton,
+    
 };
