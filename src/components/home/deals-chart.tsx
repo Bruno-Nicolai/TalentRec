@@ -13,6 +13,13 @@ const DealsChart = () => {
   
   const { data } = useList<GetFieldsFromList<DashboardDealsChartQuery>>({
     resource: 'dealStages',
+    filters: [
+      {
+        field: 'title',
+        operator: 'in',
+        value: ['WON', 'LOST'],
+      }
+    ],
     meta: {
       gqlQuery: DASHBOARD_DEALS_CHART_QUERY,
     }
