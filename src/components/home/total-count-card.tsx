@@ -1,6 +1,7 @@
 import { totalCountVariants } from "@/constants"
 import { Card, Skeleton } from "antd"
 import { Text } from "../text";
+import { Area, AreaConfig } from "@ant-design/plots";
 
 type Props = {
   resource: "companies" | "contacts" | "deals",
@@ -12,7 +13,15 @@ const DashboardTotalCountCard = ({
   isLoading,
   totalCount,
 }: Props) => {
+  
   const { primaryColor, secondaryColor, icon, title } = totalCountVariants[resource];
+  
+  const config: AreaConfig = {
+    data: totalCountVariants[resource].data,
+    xField: 'index',
+    yField: 'value',
+  }
+
   return (
     <Card
       style={{
@@ -73,10 +82,16 @@ const DashboardTotalCountCard = ({
             totalCount
           )}
         </Text>
-        {/* 20:26:48 */}
+        <Area 
+        {...config}
+        style={{
+          width: '50%',
+        }}
+        />
       </div>
     </Card>
   )
+
 }
 
 export default DashboardTotalCountCard
