@@ -5,6 +5,28 @@ export const Home = () => {
   return (
     <div>
       <Row
+        gutter={[32, 32]}>
+          <Col
+            xs={24}
+            sm={24}
+            xl={8}>
+              DbTtlCntCd
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            xl={8}>
+              DbTtlCntCd
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            xl={8}>
+              DbTtlCntCd
+          </Col>
+      </Row>
+
+      <Row
         gutter={[32, 32]}
         style={{
               marginTop: '32px'
@@ -23,7 +45,7 @@ export const Home = () => {
         <Col
           xs={24}
           sm={24}
-          xl={8}
+          xl={8*2}
           style={{
             height: '460px'
           }}
