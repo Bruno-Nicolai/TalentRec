@@ -15,9 +15,35 @@ export const CompanyList = () => {
     pagination: {
       pageSize: 28,
     },
+    sorters: {
+      initial: [
+        {
+          field: 'createdAt',
+          order: 'desc',
+        }
+      ],
+    },
+    filters: {
+      initial: [
+        {
+          field: 'name',
+          operator: 'contains',
+          value: undefined,
+        }
+      ],
+    },
+    onSearch: (values) => {
+      return [
+        {
+          field: 'name',
+          operator: 'contains',
+          value: values.name,
+        }
+      ]
+    },
     meta: {
       gqlQuery: COMPANIES_LIST_QUERY
-    }
+    },
   });
   return (
     <List
