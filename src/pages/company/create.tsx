@@ -5,6 +5,8 @@ import { useGo } from '@refinedev/core'
 import { CREATE_COMPANY_MUTATION } from '@/graphql/mutations'
 import { USERS_SELECT_QUERY } from '@/graphql/queries'
 import SelectOptionWithAvatar from '@/components/select-option-with-avatar'
+import { GetFieldsFromList } from '@refinedev/nestjs-query'
+import { UsersSelectQuery } from '@/graphql/types'
 
 const Create = () => {
     const go = useGo();
@@ -26,7 +28,7 @@ const Create = () => {
             gqlMutation: CREATE_COMPANY_MUTATION,
         },
     })
-    const { selectProps, queryResult } = useSelect({
+    const { selectProps, queryResult } = useSelect<GetFieldsFromList<UsersSelectQuery>>({
         resource: 'users',
         optionLabel: 'name',
         meta: {
@@ -61,6 +63,18 @@ const Create = () => {
                         <Select 
                             placeholder="Please choose the process moderator" 
                             {...selectProps}
+                            options={
+                                queryResult.data?.data.map((user) => ({
+                                    // 03:25:21
+                                    value: user.id,
+                                    label: (
+                                        <SelectOptionWithAvatar 
+                                            name={user.name}
+                                            avatarUrl={user.avatarUrl ?? undefined}
+                                        />
+                                    )
+                                })) ?? []
+                            }
                         />
                     </Form.Item>
                 </Form>
