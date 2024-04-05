@@ -8,6 +8,7 @@ import { getNameInitials } from '@/utilities'
 import { Edit, useForm, useSelect } from '@refinedev/antd'
 import { GetFieldsFromList } from '@refinedev/nestjs-query'
 import { Col, Form, Input, InputNumber, Row, Select } from 'antd'
+import { CompanyContactsTable } from './contacts-table'
 
 const EditCompanyProfile = () => {
   const { saveButtonProps, formProps, formLoading, queryResult } = useForm({
@@ -100,6 +101,9 @@ const EditCompanyProfile = () => {
                 </Form.Item>
             </Form>
           </Edit>
+        </Col>
+        <Col xs={24} sm={12}>
+          <CompanyContactsTable />
         </Col>
       </Row>
     </div>
