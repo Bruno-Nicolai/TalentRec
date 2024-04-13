@@ -14,7 +14,7 @@ const KanbanItem = ({ children, id, data }: React.PropsWithChildren<Props>) => {
     } = useDraggable({
         id,
         data,
-    }) /* 04:22:32 */
+    }) /* 04:34:09 */
   return (
     <div
         style={{
@@ -33,7 +33,7 @@ const KanbanItem = ({ children, id, data }: React.PropsWithChildren<Props>) => {
                 borderColor: active ? '#000040' : 'transparent',
                 cursor: 'grab',
                 userSelect: 'none',
-                backgroundColor: '#fed6a9',
+                backgroundColor: '#fdfdf2',
             }}
         >
             {active?.id === id && (

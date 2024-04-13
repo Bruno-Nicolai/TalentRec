@@ -1,4 +1,5 @@
 import { KanbanBoardContainer, KanbanBoard } from '@/components/tasks/kanban/board'
+import TaskCard from '@/components/tasks/kanban/card'
 import KanbanColumn from '@/components/tasks/kanban/column'
 import KanbanItem from '@/components/tasks/kanban/item'
 import { TASKS_QUERY, TASK_STAGES_QUERY } from '@/graphql/queries'
@@ -75,9 +76,12 @@ const TaskList = () => {
                 <KanbanItem
                   key={task.id}
                   id={task.id}
-                  data={{...task, stageIid: 'unassigned'}}
+                  data={{ ...task, stageId: 'unassigned' }}
                 >
-                  {task.title}
+                  <TaskCard 
+                    {...task}
+                    dueDate={task.dueDate || undefined}
+                  />
                 </KanbanItem>
               ))}
             </KanbanColumn>
