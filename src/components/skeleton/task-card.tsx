@@ -1,6 +1,6 @@
 import { Card, Skeleton } from "antd";
 
-const ProjectCardSkeleton = () => {
+const TaskCardSkeleton = () => {
   return (
     <Card
       size="small"
@@ -32,4 +32,4 @@ const ProjectCardSkeleton = () => {
   );
 };
 
-export default ProjectCardSkeleton;
+export default TaskCardSkeleton;
