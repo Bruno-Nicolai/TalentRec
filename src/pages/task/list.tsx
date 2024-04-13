@@ -1,5 +1,5 @@
 import { KanbanBoardContainer, KanbanBoard } from '@/components/tasks/kanban/board'
-import TaskCard from '@/components/tasks/kanban/card'
+import { TaskCardMemo } from '@/components/tasks/kanban/card'
 import KanbanColumn from '@/components/tasks/kanban/column'
 import KanbanItem from '@/components/tasks/kanban/item'
 import { TASKS_QUERY, TASK_STAGES_QUERY } from '@/graphql/queries'
@@ -78,7 +78,7 @@ const TaskList = () => {
                   id={task.id}
                   data={{ ...task, stageId: 'unassigned' }}
                 >
-                  <TaskCard 
+                  <TaskCardMemo 
                     {...task}
                     dueDate={task.dueDate || undefined}
                   />

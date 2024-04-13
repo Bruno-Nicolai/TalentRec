@@ -1,11 +1,12 @@
+import CustomAvatar from '@/components/custom-avatar'
 import { Text } from '@/components/text'
 import { TextIcon } from '@/components/text-icon'
 import { User } from '@/graphql/schema.types'
 import { getDateColor } from '@/utilities'
 import { ClockCircleOutlined, DeleteOutlined, EyeOutlined, MoreOutlined } from '@ant-design/icons'
-import { Button, Card, ConfigProvider, Dropdown, MenuProps, Tag, theme } from 'antd'
+import { Button, Card, ConfigProvider, Dropdown, MenuProps, Space, Tag, Tooltip, theme } from 'antd'
 import dayjs from 'dayjs'
-import React, { useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 
 type TaskCardProps = {
     id: string,
@@ -97,6 +98,9 @@ const TaskCard = ({ id, title, dueDate, users }: TaskCardProps) => {
               onClick={(e) => {
                 e.stopPropagation();
               }}
+              style={{
+                margin: '0 0 0 8px',
+              }}
             />
           </Dropdown>
         }
@@ -130,6 +134,31 @@ const TaskCard = ({ id, title, dueDate, users }: TaskCardProps) => {
               {dueDateOptions.text}
             </Tag>
           )}
+          {!!users?.length && (
+            <Space
+              size={4}
+              wrap
+              direction='horizontal'
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                marginLeft: '4px',
+                marginRight: 0,
+              }}
+            >
+              {users.map((user) => (
+                <Tooltip
+                  key={user.id}
+                  title={user.name}
+                >
+                  <CustomAvatar 
+                    name={user.name} 
+                    src={user.avatarUrl} 
+                  />
+                </Tooltip>
+              ))}
+            </Space>
+          )}
         </div>
       </Card>
     </ConfigProvider>
@@ -137,3 +166,13 @@ const TaskCard = ({ id, title, dueDate, users }: TaskCardProps) => {
 }
 
 export default TaskCard
+
+export const TaskCardMemo = memo(TaskCard, (prev, next) => {
+  return (
+    prev.id === next.id &&
+    prev.title === next.title &&
+    prev.dueDate === next.dueDate &&
+    prev.users?.length === next.users?.length &&
+    prev.updatedAt === next.updatedAt
+  )
+})
