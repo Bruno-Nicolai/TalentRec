@@ -14,7 +14,7 @@ const KanbanItem = ({ children, id, data }: React.PropsWithChildren<Props>) => {
     } = useDraggable({
         id,
         data,
-    }) /* 04:34:09 */
+    }) 
   return (
     <div
         style={{
