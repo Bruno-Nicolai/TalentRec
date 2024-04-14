@@ -4,6 +4,7 @@ import { TextIcon } from '@/components/text-icon'
 import { User } from '@/graphql/schema.types'
 import { getDateColor } from '@/utilities'
 import { ClockCircleOutlined, DeleteOutlined, EyeOutlined, MoreOutlined } from '@ant-design/icons'
+import { useDelete, useNavigation } from '@refinedev/core'
 import { Button, Card, ConfigProvider, Dropdown, MenuProps, Space, Tag, Tooltip, theme } from 'antd'
 import dayjs from 'dayjs'
 import React, { memo, useMemo } from 'react'
@@ -22,7 +23,8 @@ type TaskCardProps = {
 
 const TaskCard = ({ id, title, dueDate, users }: TaskCardProps) => {
   const { token } = theme.useToken();
-  const edit = () => {}
+  const { edit } = useNavigation();
+  const { mutate: remove } = useDelete();
   const dropdownItems = useMemo(() => {
 
     const dropdownItems: MenuProps['items'] = [
@@ -31,7 +33,7 @@ const TaskCard = ({ id, title, dueDate, users }: TaskCardProps) => {
         key: '1',
         icon: <EyeOutlined />,
         onClick: () => {
-          edit()
+          edit('tasks', id, 'replace')
         },
       },
       {
@@ -39,7 +41,15 @@ const TaskCard = ({ id, title, dueDate, users }: TaskCardProps) => {
         label: 'Delete Card',
         key: '2',
         icon: <DeleteOutlined />,
-        onClick: () => {},
+        onClick: () => {
+          remove({
+            resource: 'tasks',
+            id,
+            meta: {
+              operation: 'task',
+            }
+          })
+        },
       },
     ]
 

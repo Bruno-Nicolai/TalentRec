@@ -33,7 +33,6 @@ const KanbanItem = ({ children, id, data }: React.PropsWithChildren<Props>) => {
                 borderColor: active ? '#000040' : 'transparent',
                 cursor: 'grab',
                 userSelect: 'none',
-                backgroundColor: '#fdfdf2',
             }}
         >
             {active?.id === id && (
