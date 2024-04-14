@@ -22,9 +22,6 @@ const KanbanColumn = ({
     data, 
     onAddClick, 
 }: React.PropsWithChildren<Props>) => {
-    // const count = 6;
-    // const description = 'Description';
-    // const title = 'Title';
     const { isOver, setNodeRef, active } = useDroppable({ id, data, })
     const onAddClickHandler = () => {
         onAddClick?.({ id })
