@@ -82,7 +82,7 @@ const TaskCard = ({ id, title, dueDate, users }: TaskCardProps) => {
       <Card
         size="small"
         title={<Text ellipsis={{tooltip: title}}>{title}</Text>}
-        onClick={() => edit('tasks', id, 'replace')} 
+        onClick={() => edit('tasks', id, 'replace')}
         extra={
           <Dropdown
             trigger={["click"]}
