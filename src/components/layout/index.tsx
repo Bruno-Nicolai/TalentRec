@@ -1,11 +1,14 @@
 import { ThemedLayoutV2, ThemedSiderV2, ThemedTitleV2 } from "@refinedev/antd"
 import Header from "./header"
-import { Divider } from "antd";
+import { Divider } from "antd"
+import { LeftSquareOutlined, RightSquareOutlined } from "@ant-design/icons";
 
-const CustomSider = (siderProps: any) => (
+const CustomSider = () => (
   <ThemedSiderV2 
-    {...siderProps} 
-    fixed 
+    fixed
+    Title={(titleProps) => (
+      <ThemedTitleV2 {...titleProps} icon={null} text="TalentRec"/>
+    )}  
     render={({ items, logout }) => {
       return (
         <>
@@ -15,9 +18,11 @@ const CustomSider = (siderProps: any) => (
         </>
       );
     }}
-    Title={(titleProps: any) => (
-      <ThemedTitleV2 {...titleProps} icon={null} text="TalentRec"/>
-    )} 
+    activeItemDisabled
+    meta={{
+      expandIcon: <RightSquareOutlined />,
+      collapseIcon: <LeftSquareOutlined />,
+    }}
   />
 )
 

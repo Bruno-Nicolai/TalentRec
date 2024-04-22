@@ -7,7 +7,7 @@ import { currencyNumber } from "@/utilities";
 import { SearchOutlined } from "@ant-design/icons";
 import { CreateButton, DeleteButton, EditButton, FilterDropdown, List, useTable } from "@refinedev/antd";
 import { HttpError, getDefaultFilter, useGo } from "@refinedev/core";
-import { GetFields, GetFieldsFromList } from "@refinedev/nestjs-query";
+import { GetFieldsFromList } from "@refinedev/nestjs-query";
 import { Input, Space, Table } from "antd";
 
 export const CompanyList = ({ children }: React.PropsWithChildren) => {

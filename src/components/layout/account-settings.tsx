@@ -90,7 +90,7 @@ export const AccountSettings = ({ opened, setOpened, userId }: Props) => {
         width={756}
         styles={{
           body: {
-            background: "#f5f5f5",
+            background: "#562E01",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -108,7 +108,7 @@ export const AccountSettings = ({ opened, setOpened, userId }: Props) => {
       open={opened}
       width={756}
       styles={{
-        body: { background: "#f5f5f5", padding: 0 },
+        body: { background: "#562E01", padding: 0 },
         header: { display: "none" },
       }}
     >
@@ -118,7 +118,7 @@ export const AccountSettings = ({ opened, setOpened, userId }: Props) => {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "16px",
-          backgroundColor: "#fff",
+          backgroundColor: "#FED6A9",
         }}
       >
         <Text strong>Account Settings</Text>

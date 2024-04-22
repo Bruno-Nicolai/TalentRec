@@ -25,7 +25,6 @@ const DealsChart = () => {
     }
   });
 
-  // console.log(data);
   const dealData = React.useMemo(() => {
     return mapDealsData(data?.data);
   }, [data?.data])

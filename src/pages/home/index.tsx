@@ -2,7 +2,7 @@ import { DashboardTotalCountCard, DealsChart, LatestActivities, UpcomingEvents }
 import { DASHBOARD_TOTAL_COUNTS_QUERY } from "@/graphql/queries"
 import { DashboardTotalCountsQuery } from "@/graphql/types"
 import { useCustom } from "@refinedev/core"
-import { Col, Row } from "antd"
+import { Col, ConfigProvider, Row } from "antd"
 
 export const Home = () => {
   const { data, isLoading } = useCustom<DashboardTotalCountsQuery>({
@@ -13,81 +13,93 @@ export const Home = () => {
     }
   })
   return (
-    <div>
+    <ConfigProvider
+      theme={{
+        components: {
+          Card: {
+            colorBgContainer: "#FDFDF2",
+          },
+        }
+      }}
+    >
 
-      <Row
-        gutter={[32, 32]}>
-          <Col
-            xs={24}
-            sm={24}
-            xl={8}>
-              <DashboardTotalCountCard 
-                resource="companies"
-                isLoading={isLoading}
-                totalCount={data?.data.companies.totalCount}
-              />
-          </Col>
-          <Col
-            xs={24}
-            sm={24}
-            xl={8}>
-              <DashboardTotalCountCard 
-                resource="contacts"
-                isLoading={isLoading}
-                totalCount={data?.data.contacts.totalCount}
-              />
-          </Col>
-          <Col
-            xs={24}
-            sm={24}
-            xl={8}>
-              <DashboardTotalCountCard 
-                resource="deals"
-                isLoading={isLoading}
-                totalCount={data?.data.deals.totalCount}
-              />
-          </Col>
-      </Row>
+      <div>
 
-      <Row
-        gutter={[32, 32]}
-        style={{
-              marginTop: '32px'
+        <Row
+          gutter={[32, 32]}>
+            <Col
+              xs={24}
+              sm={24}
+              xl={8}>
+                <DashboardTotalCountCard 
+                  resource="companies"
+                  isLoading={isLoading}
+                  totalCount={data?.data.companies.totalCount}
+                />
+            </Col>
+            <Col
+              xs={24}
+              sm={24}
+              xl={8}>
+                <DashboardTotalCountCard 
+                  resource="contacts"
+                  isLoading={isLoading}
+                  totalCount={data?.data.contacts.totalCount}
+                />
+            </Col>
+            <Col
+              xs={24}
+              sm={24}
+              xl={8}>
+                <DashboardTotalCountCard 
+                  resource="deals"
+                  isLoading={isLoading}
+                  totalCount={data?.data.deals.totalCount}
+                />
+            </Col>
+        </Row>
+
+        <Row
+          gutter={[32, 32]}
+          style={{
+                marginTop: '32px'
+              }}
+        >
+          <Col
+            xs={24}
+            sm={24}
+            xl={8}
+            style={{
+              height: '460px'
             }}
-      >
-        <Col
-          xs={24}
-          sm={24}
-          xl={8}
+          >
+            <UpcomingEvents />
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            xl={8*2}
+            style={{
+              height: '460px'
+            }}
+          >
+            <DealsChart />
+          </Col>
+        </Row>
+        
+        <Row
+          gutter={[32, 32]}
           style={{
-            height: '460px'
+            marginTop: '32px',
           }}
         >
-          <UpcomingEvents />
-        </Col>
-        <Col
-          xs={24}
-          sm={24}
-          xl={8*2}
-          style={{
-            height: '460px'
-          }}
-        >
-          <DealsChart />
-        </Col>
-      </Row>
-      
-      <Row
-        gutter={[32, 32]}
-        style={{
-          marginTop: '32px',
-        }}
-      >
-        <Col xs={24}>
-          <LatestActivities />
-        </Col>
-      </Row>
+          <Col xs={24}>
+            <LatestActivities />
+          </Col>
+        </Row>
+        
+      </div>
 
-    </div>
+    </ConfigProvider>
   )
 }

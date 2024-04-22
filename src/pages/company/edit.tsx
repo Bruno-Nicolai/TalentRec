@@ -25,7 +25,7 @@ const EditCompanyProfile = () => {
       mode: 'off',
     },
     meta: {
-        gqlQuery: USERS_SELECT_QUERY,
+      gqlQuery: USERS_SELECT_QUERY,
     }
   })
   return (
@@ -54,51 +54,68 @@ const EditCompanyProfile = () => {
                   marginBottom: '24px',
                 }}
               />
-                <Form.Item
-                    label="Responsible"
-                    name="salesOwnerId"
-                    initialValue={formProps?.initialValues?.salesOwner?.id}
-                >
-                  <Select 
-                      placeholder="Please choose the process moderator" 
-                      {...selectProps}
-                      options={
-                          queryResultUsers.data?.data.map((user) => ({
-                              // 03:25:21
-                              value: user.id,
-                              label: (
-                                  <SelectOptionWithAvatar 
-                                      name={user.name}
-                                      avatarUrl={user.avatarUrl ?? undefined}
-                                  />
-                              )
-                          })) ?? []
-                      }
-                  />
-                </Form.Item>
-                <Form.Item>
-                  <Select options={ companySizeOptions } />
-                </Form.Item>
-                <Form.Item>
-                  <InputNumber 
-                    autoFocus
-                    addonBefore='$'
-                    min={0}
-                    placeholder="0.00"
-                  />
-                </Form.Item>
-                <Form.Item label="Industry">
-                  <Select options={ industryOptions } />
-                </Form.Item>
-                <Form.Item label="Business Type">
-                  <Select options={ businessTypeOptions } />
-                </Form.Item>
-                <Form.Item label="Country" name="country">
-                  <Input placeholder="Country" />
-                </Form.Item>
-                <Form.Item label="Website" name="website">
-                  <Input placeholder="Website" />
-                </Form.Item>
+              <Form.Item
+                  label="Responsible"
+                  name="salesOwnerId"
+                  initialValue={formProps?.initialValues?.salesOwner?.id}
+              >
+                <Select 
+                    placeholder="Please choose the process moderator" 
+                    {...selectProps}
+                    options={
+                        queryResultUsers.data?.data.map((user) => ({
+                            // 03:25:21
+                            value: user.id,
+                            label: (
+                                <SelectOptionWithAvatar 
+                                    name={user.name}
+                                    avatarUrl={user.avatarUrl ?? undefined}
+                                />
+                            )
+                        })) ?? []
+                    }
+                />
+              </Form.Item>
+              <Form.Item label="Company Size">
+                <Select options={ companySizeOptions } />
+              </Form.Item>
+              <Form.Item label="Niche Market">
+                <Select options={ industryOptions } />
+              </Form.Item>
+              <Form.Item label="Company Details">
+                <Input.TextArea 
+                  maxLength={800} 
+                  autoSize={{ maxRows: 5, }} 
+                  allowClear 
+                />
+              </Form.Item>
+              <Form.Item label="Job Description / Requisites">
+                <Input.TextArea 
+                  maxLength={800} 
+                  autoSize={{ maxRows: 5 }} 
+                  allowClear 
+                />
+              </Form.Item>
+              <Form.Item label="Annual Revenue">
+                <InputNumber 
+                  autoFocus
+                  addonBefore='$'
+                  min={0}
+                  placeholder="0.00"
+                />
+              </Form.Item>
+              <Form.Item label="Business Type">
+                <Select options={ businessTypeOptions } />
+              </Form.Item>
+              <Form.Item label="Country" name="country">
+                <Input placeholder="Country" />
+              </Form.Item>
+              <Form.Item label="Company page" name="website">
+                <Input placeholder="Website" />
+              </Form.Item>
+              <Form.Item label="Opportunity" name="opportunity">
+                <Input placeholder="Opportunity link" />
+              </Form.Item>
             </Form>
           </Edit>
         </Col>
