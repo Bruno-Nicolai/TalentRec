@@ -2,11 +2,10 @@ import { AuthBindings } from "@refinedev/core";
 
 import { API_URL, dataProvider } from "./data";
 
-// For demo purposes and testing, use following credentials
-export const authCredentials = {
-    email: "michael.scott@dundermifflin.com",
-    password: "demodemo",
-}
+// export const authCredentials = {
+//     email: "michael.scott@dundermifflin.com",
+//     password: "demodemo",
+// }
 
 export const authProvider: AuthBindings = {
 
@@ -37,6 +36,7 @@ export const authProvider: AuthBindings = {
 
             return {
                 success: true,
+                logout: false,
                 redirectTo: "/",
             };
 
@@ -50,31 +50,6 @@ export const authProvider: AuthBindings = {
                 },
             };
         }
-    },
-
-    // simply remove the accessToken from localStorage for the logout
-    logout: async () => {
-        localStorage.removeItem("access_token");
-
-        return {
-            success: true,
-            redirectTo: "/login",
-        }
-
-    },
-
-    onError: async (error) => {
-
-        // a check to see if the error is an authentication error
-        // if so, set logout to true
-        if (error.statusCode === "UNAUTHENTICATED") {
-            return {
-                logout: true,
-                ...error,
-            };
-        }
-        
-        return { error };
     },
 
     check: async () => {
@@ -107,13 +82,85 @@ export const authProvider: AuthBindings = {
             // for any other error, redirect to the login page
             return {
                 authenticated: false,
+                logout: true,
                 redirectTo: "/login",
             };
         }
 
     },
 
+    // simply remove the accessToken from localStorage for the logout
+    logout: async () => {
+        
+        localStorage.removeItem("access_token");
+        return {
+            success: true,
+            redirectTo: "/login",
+        };
+
+    },
+
+    onError: async (error) => {
+
+        // a check to see if the error is an authentication error
+        // if so, set logout to true
+        if (error.statusCode === "UNAUTHENTICATED") {
+            return {
+                logout: true,
+                ...error,
+            };
+        }
+        
+        return { error };
+    },
+
+    register: async ({ email, password }) => {
+        try {
+            await dataProvider.custom({
+                url: API_URL,
+                method: "post",
+                headers: {},
+                meta: {
+                    variables: { email, password },
+                    rawQuery: `
+                        mutation register($email: String!, $password: String!) {
+                            register(registerInput: {
+                            email: $email
+                                password: $password
+                            }) {
+                                id
+                                email
+                            }
+                        }
+                    `,
+                },
+            });
+            
+            return {
+                success: true,
+                redirectTo: '/login', // Redirect to login page after successful registration
+            };
+
+        } catch (e) {
+            const error = e as Error;
+            return {
+                success: false,
+                error: { 
+                    message: "message" in error ? error.message : "Register failed",
+                    name: "name" in error ? error.name : "Invalid email or password",
+                },
+            };
+        }
+    },
+
+    /* forgotPassword: async () => {}, */
+
+    /* updatePassword: async () => {}, */
+
+    getPermissions: async () => null,
+
     getIdentity: async () => {
+
         const accessToken = localStorage.getItem("access_token");
 
         try {
