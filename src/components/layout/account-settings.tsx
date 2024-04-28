@@ -149,7 +149,7 @@ export const AccountSettings = ({ opened, setOpened, userId }: Props) => {
               <Input placeholder="Name" />
             </Form.Item>
             <Form.Item label="Phone" name="phone">
-              <Input placeholder="Timezone" />
+              <Input placeholder="00912341234" />
             </Form.Item>
             <Form.Item label="Email" name="email">
               <Input placeholder="email" />
