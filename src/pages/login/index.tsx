@@ -1,23 +1,22 @@
 import { AuthPage } from "@refinedev/antd";
 import { Link } from "react-router-dom";
 import { Text } from "@/components/text";
-import { GoogleOutlined } from "@ant-design/icons";
+// import { GoogleOutlined } from "@ant-design/icons";
 
 export const Login = () => {
   return (
     <AuthPage
       type="login"
       title={false}
-      providers={[
+      /* providers={[
         {
           name: "google",
           icon: <GoogleOutlined />,
           label: "Sign in",
         }
-      ]}
+      ]} */
       formProps={{
         // initialValues: authCredentials,
-        
       }}
       registerLink={
         <div

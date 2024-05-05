@@ -2,15 +2,21 @@ import { AuthBindings } from "@refinedev/core";
 
 import { API_URL, dataProvider } from "./data";
 
-// export const authCredentials = {
 //     email: "michael.scott@dundermifflin.com",
 //     password: "demodemo",
-// }
 
 export const authProvider: AuthBindings = {
 
-    login: async ({ email }) => {
+    login: async ({ /* providerName, */ email }) => {
         try {
+            /* if (providerName === "google") {
+                
+                window.location.href = "https://accounts.google.com/o/oauth2/v2/auth";
+                return {
+                    success: true,
+                };
+
+            } else { */
             // call the login mutation
             // dataProvider.custom is used to make a custom request to the GraphQL API
             // this will call dataProvider which will go through the fetchWrapper function
@@ -39,7 +45,7 @@ export const authProvider: AuthBindings = {
                 logout: false,
                 redirectTo: "/",
             };
-
+            // }
         } catch (e) {
             const error = e as Error;
             return {
@@ -186,7 +192,7 @@ export const authProvider: AuthBindings = {
                                 email
                                 phone
                                 jobTitle
-                                timezone
+                                
                                 avatarUrl
                             }
                         }
