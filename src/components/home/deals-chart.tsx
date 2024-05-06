@@ -8,6 +8,7 @@ import { DASHBOARD_DEALS_CHART_QUERY } from '@/graphql/queries'
 import { mapDealsData } from '@/utilities/helpers'
 import { GetFieldsFromList } from '@refinedev/nestjs-query'
 import { DashboardDealsChartQuery } from '@/graphql/types'
+import { coffeeTheme } from '@/config'
 
 const DealsChart = () => {
   
@@ -30,6 +31,7 @@ const DealsChart = () => {
   }, [data?.data])
 
   const config: AreaConfig = {
+    
     data: dealData,
     xField: 'timeText',
     yField: 'value',
@@ -39,7 +41,7 @@ const DealsChart = () => {
     smooth: true,
     animation: true,
     legend: {
-      offsetY: -8/* -6 */,
+      offsetY: -8,
     },
     yAxis: {
       tickCount: 6,
@@ -57,6 +59,20 @@ const DealsChart = () => {
         }
       }
     },
+    areaStyle: (datum) => {
+
+      const won = `l(270) 0:#fff 0.5:${coffeeTheme.token?.colorSuccess ?? "#FFE2C2"} 1:${coffeeTheme.token?.colorSuccess ?? "#FA761E"}`;
+      const lost = `l(270) 0:#fff 0.5:${coffeeTheme.token?.colorError ?? "#4D4C48"} 1:${coffeeTheme.token?.colorError ?? "#0D0D02"}`;
+
+      return { fill: datum.state === "Won" ? won : lost };
+
+    },
+    color: (datum) => {
+      return datum.state === "Won" 
+        ? coffeeTheme.token?.colorSuccess ?? "#FA761E"
+        : coffeeTheme.token?.colorError ?? "#0D0D02" 
+    },
+
   };
 
   return (

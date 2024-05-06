@@ -76,10 +76,10 @@ const EditCompanyProfile = () => {
                     }
                 />
               </Form.Item>
-              <Form.Item label="Company Size">
+              <Form.Item label="Company Size" name="companySize">
                 <Select options={ companySizeOptions } />
               </Form.Item>
-              <Form.Item label="Niche Market">
+              <Form.Item label="Niche Market" name="industry">
                 <Select options={ industryOptions } />
               </Form.Item>
               <Form.Item label="Company Details">
@@ -87,6 +87,7 @@ const EditCompanyProfile = () => {
                   maxLength={800} 
                   autoSize={{ maxRows: 5, }} 
                   allowClear 
+                  defaultValue={"desc desc desc"}
                 />
               </Form.Item>
               <Form.Item label="Job Description / Requisites">
@@ -94,9 +95,10 @@ const EditCompanyProfile = () => {
                   maxLength={800} 
                   autoSize={{ maxRows: 5 }} 
                   allowClear 
+                  defaultValue={"desc desc desc"}
                 />
               </Form.Item>
-              <Form.Item label="Annual Revenue">
+              <Form.Item label="Annual Revenue" name="totalRevenue">
                 <InputNumber 
                   autoFocus
                   addonBefore='$'
@@ -104,7 +106,7 @@ const EditCompanyProfile = () => {
                   placeholder="0.00"
                 />
               </Form.Item>
-              <Form.Item label="Business Type">
+              <Form.Item label="Business Type" name="businessType">
                 <Select options={ businessTypeOptions } />
               </Form.Item>
               <Form.Item label="Country" name="country">
@@ -114,7 +116,7 @@ const EditCompanyProfile = () => {
                 <Input placeholder="Website" />
               </Form.Item>
               <Form.Item label="Opportunity" name="opportunity">
-                <Input placeholder="Opportunity link" />
+                <Input placeholder="Opportunity link" defaultValue={"https://my_oportunity.com"} />
               </Form.Item>
             </Form>
           </Edit>
@@ -128,4 +130,3 @@ const EditCompanyProfile = () => {
 }
 
 export default EditCompanyProfile
-// 03:46:50

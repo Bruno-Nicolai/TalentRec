@@ -1,4 +1,4 @@
-import { UnorderedListOutlined } from "@ant-design/icons"
+import { HistoryOutlined } from "@ant-design/icons";
 import { Card, List, Space } from "antd"
 import { Text } from "../text"
 import LatestActivitiesSkeleton from "../skeleton/latest-activities";
@@ -57,7 +57,7 @@ const LatestActivities = () => {
                         gap: '8px',
                     }}
                 >
-                    <UnorderedListOutlined />
+                    <HistoryOutlined />
                     <Text
                         size="sm"
                         style={{ marginLeft: '.5rem' }}

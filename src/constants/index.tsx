@@ -1,4 +1,4 @@
-import { AuditOutlined, ShopOutlined, TeamOutlined } from "@ant-design/icons";
+import { SketchOutlined, TeamOutlined, WalletFilled,  } from "@ant-design/icons";
 
 const IconWrapper = ({
   color,
@@ -40,14 +40,14 @@ export const totalCountVariants: {
   };
 } = {
   companies: {
-    primaryColor: "#1677FF",
-    secondaryColor: "#BAE0FF",
+    primaryColor: "#8D8D99",
+    secondaryColor: "#F2F2F2",
     icon: (
-      <IconWrapper color="#E6F4FF">
-        <ShopOutlined
+      <IconWrapper color="transparent">
+        <SketchOutlined
           className="md"
           style={{
-            color: "#1677FF",
+            color: "#111",
           }}
         />
       </IconWrapper>
@@ -77,14 +77,14 @@ export const totalCountVariants: {
     ],
   },
   contacts: {
-    primaryColor: "#52C41A",
-    secondaryColor: "#D9F7BE",
+    primaryColor: "#311919",
+    secondaryColor: "#FED6A9",
     icon: (
-      <IconWrapper color="#F6FFED">
+      <IconWrapper color="transparent">
         <TeamOutlined
           className="md"
           style={{
-            color: "#52C41A",
+            color: "#111",
           }}
         />
       </IconWrapper>
@@ -118,14 +118,14 @@ export const totalCountVariants: {
     ],
   },
   deals: {
-    primaryColor: "#FA541C",
+    primaryColor: "#fa761e",
     secondaryColor: "#FFD8BF",
     icon: (
-      <IconWrapper color="#FFF2E8">
-        <AuditOutlined
+      <IconWrapper color="transparent">
+        <WalletFilled
           className="md"
           style={{
-            color: "#FA541C",
+            color: "#111",
           }}
         />
       </IconWrapper>
