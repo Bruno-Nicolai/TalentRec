@@ -187,6 +187,18 @@ export const COMPANY_CONTACTS_TABLE_QUERY = gql`
   }
 `;
 
+export const COMPANY_CONTACTS_GET_COMPANY_QUERY = gql`
+    query CompanyContactsGetCompany($id: ID!) {
+        company(id: $id) {
+            id
+            name
+            salesOwner {
+                id
+            }
+        }
+    }
+`;
+
 // Query to get task stages list
 export const TASK_STAGES_QUERY = gql`
   query TaskStages(

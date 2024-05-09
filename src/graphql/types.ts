@@ -149,11 +149,20 @@ export type CompanyContactsTableQueryVariables = Types.Exact<{
   paging: Types.OffsetPaging;
 }>;
 
-
 export type CompanyContactsTableQuery = { contacts: (
     Pick<Types.ContactConnection, 'totalCount'>
     & { nodes: Array<Pick<Types.Contact, 'id' | 'name' | 'avatarUrl' | 'jobTitle' | 'email' | 'phone' | 'status'>> }
   ) };
+
+export type CompanyContactsGetCompanyQueryVariables = Types.Exact<{
+  id: Types.Scalars["ID"]["input"];
+}>;
+
+export type CompanyContactsGetCompanyQuery = {
+  company: Pick<Types.Company, "id" | "name"> & {
+    salesOwner: Pick<Types.User, "id">;
+  };
+};
 
 export type TaskStagesQueryVariables = Types.Exact<{
   filter: Types.TaskStageFilter;
