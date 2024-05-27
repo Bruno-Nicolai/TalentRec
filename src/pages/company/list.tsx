@@ -107,7 +107,7 @@ export const CompanyList = ({ children }: React.PropsWithChildren) => {
             render={(value, company) => (
               <Text>
                 {currencyNumber(company.dealsAggregate?.[0].sum?.value || 0)} 
-                {/* modify in next weeks */}
+                
               </Text>
             )}
           />

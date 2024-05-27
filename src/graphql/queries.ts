@@ -187,6 +187,7 @@ export const COMPANY_CONTACTS_TABLE_QUERY = gql`
   }
 `;
 
+// Query company details based on its ID
 export const COMPANY_CONTACTS_GET_COMPANY_QUERY = gql`
     query CompanyContactsGetCompany($id: ID!) {
         company(id: $id) {

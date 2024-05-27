@@ -15,7 +15,7 @@ import {
   UpdateUserMutation,
   UpdateUserMutationVariables,
 } from "@/graphql/types";
-// 01:20:50
+
 type Props = {
   opened: boolean;
   setOpened: (opened: boolean) => void;
@@ -108,7 +108,10 @@ export const AccountSettings = ({ opened, setOpened, userId }: Props) => {
       open={opened}
       width={756}
       styles={{
-        body: { background: "#562E01", padding: 0 },
+        body: { 
+          background: "#562E01", 
+          padding: 0 
+        },
         header: { display: "none" },
       }}
     >

@@ -4,8 +4,28 @@ export type UpdateUserMutationVariables = Types.Exact<{
   input: Types.UpdateOneUserInput;
 }>;
 
-
 export type UpdateUserMutation = { updateOneUser: Pick<Types.User, 'id' | 'name' | 'avatarUrl' | 'email' | 'phone' | 'jobTitle'> };
+
+
+export type UpdateContactMutationVariables = Types.Exact<{
+  input: Types.UpdateOneContactInput;
+}>;
+
+export type UpdateContactMutation = {
+  contact: Pick<
+    Types.Contact,
+    | "id"
+    | "name"
+    | "email"
+    | "jobTitle"
+    | "phone"
+    | "timezone"
+    | "avatarUrl"
+    | "createdAt"
+    | "status"
+  >
+};
+
 
 export type CreateCompanyMutationVariables = Types.Exact<{
   input: Types.CreateOneCompanyInput;
@@ -27,11 +47,11 @@ export type UpdateCompanyMutation = { updateOneCompany: (
     & { salesOwner: Pick<Types.User, 'id' | 'name' | 'avatarUrl'> }
   ) };
 
+  
 export type UpdateTaskStageMutationVariables = Types.Exact<{
   input: Types.UpdateOneTaskInput;
 }>;
-
-
+  
 export type UpdateTaskStageMutation = { updateOneTask: Pick<Types.Task, 'id'> };
 
 export type CreateTaskMutationVariables = Types.Exact<{
@@ -163,6 +183,7 @@ export type CompanyContactsGetCompanyQuery = {
     salesOwner: Pick<Types.User, "id">;
   };
 };
+
 
 export type TaskStagesQueryVariables = Types.Exact<{
   filter: Types.TaskStageFilter;

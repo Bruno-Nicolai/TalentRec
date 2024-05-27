@@ -26,15 +26,19 @@ import {
 import { Text } from "@/components/text";
 import CustomAvatar from "@/components/custom-avatar";
 import { ContactStatusTag } from "@/components/tags/contact-status-tag";
-import { FC, useMemo } from "react";
+import { FC, useMemo, useState } from "react";
 import { HttpError, useCreateMany, useOne } from "@refinedev/core";
 import { coffeeTheme } from "@/config";
+import { ContactShowPage } from "./show-contact";
 
 type Contact = GetFieldsFromList<CompanyContactsTableQuery>;
 
 export const CompanyContactsTable: FC = () => {
   // get params from the url
   const params = useParams();
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [selectedContact, setSelectedContact] = useState<Contact>();
 
   /**
    * Refine offers a TanStack Table adapter with @refinedev/react-table that allows us to use the TanStack Table library with Refine.
@@ -124,6 +128,11 @@ export const CompanyContactsTable: FC = () => {
     });
   }, [filters]);
 
+  const handleRowClick = (record: Contact) => {
+    setSelectedContact(record);
+    setDrawerOpen(true);
+  };
+
   return (
     <Card
       headStyle={{
@@ -149,7 +158,7 @@ export const CompanyContactsTable: FC = () => {
       // property used to render additional content in the top-right corner of the card
       extra={
         <>
-          <Text className="tertiary">Total contacts: </Text>
+          <Text>Total contacts: </Text>
           <Text strong>
             {/* if pagination is not disabled and total is provided then show the total */}
             {tableProps?.pagination !== false && tableProps.pagination?.total}
@@ -171,6 +180,9 @@ export const CompanyContactsTable: FC = () => {
         <Table
           {...tableProps}
           rowKey="id"
+          onRow={(record) => ({
+            onDoubleClick: () => handleRowClick(record),
+          })}
           pagination={{
             ...tableProps.pagination,
             showSizeChanger: false, // hide the page size changer
@@ -247,6 +259,11 @@ export const CompanyContactsTable: FC = () => {
           />
         </Table>
       )}
+      <ContactShowPage 
+        opened={drawerOpen} 
+        setOpened={setDrawerOpen} 
+        contactId={selectedContact ? selectedContact.id : ""} 
+      />
     </Card>
   );
 };

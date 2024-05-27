@@ -51,6 +51,23 @@ export const UPDATE_COMPANY_MUTATION = gql`
   }
 `;
 
+// Mutation to update contact details of a company
+export const UPDATE_CONTACT_MUTATION = gql`
+  mutation UpdateContact($input: UpdateOneContactInput!) {
+    updateOneContact(input: $input) {
+      id
+      name
+      email
+      jobTitle
+      phone
+      timezone
+      avatarUrl
+      createdAt
+      status
+    }
+  }
+`;
+
 // Mutation to update task stage of a task
 export const UPDATE_TASK_STAGE_MUTATION = gql`
   mutation UpdateTaskStage($input: UpdateOneTaskInput!) {
