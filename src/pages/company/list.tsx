@@ -101,7 +101,7 @@ export const CompanyList = ({ children }: React.PropsWithChildren) => {
               </Space>
             )}
           />
-          <Table.Column<Company> 
+          {/* <Table.Column<Company> 
             dataIndex="totalRevenue"
             title="Open Deals Amount"
             render={(value, company) => (
@@ -110,11 +110,12 @@ export const CompanyList = ({ children }: React.PropsWithChildren) => {
                 
               </Text>
             )}
-          />
+          /> */}
           <Table.Column<Company> 
             dataIndex="id"
             title="Actions"
             fixed="right"
+            align="end"
             render={(value) => (
               <Space>
                 <EditButton 
