@@ -38,7 +38,7 @@ export const CompanyContactsTable: FC = () => {
   const params = useParams();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [selectedContact, setSelectedContact] = useState<Contact>();
+  const [selectedContactId, setSelectedContactId] = useState<string | null>(null);
 
   /**
    * Refine offers a TanStack Table adapter with @refinedev/react-table that allows us to use the TanStack Table library with Refine.
@@ -129,7 +129,7 @@ export const CompanyContactsTable: FC = () => {
   }, [filters]);
 
   const handleRowClick = (record: Contact) => {
-    setSelectedContact(record);
+    setSelectedContactId(record.id);
     setDrawerOpen(true);
   };
 
@@ -262,7 +262,7 @@ export const CompanyContactsTable: FC = () => {
       <ContactShowPage 
         opened={drawerOpen} 
         setOpened={setDrawerOpen} 
-        contactId={selectedContact ? selectedContact.id : ""} 
+        contactId={selectedContactId} 
       />
     </Card>
   );
