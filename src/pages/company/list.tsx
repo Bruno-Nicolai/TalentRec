@@ -3,7 +3,6 @@ import { Text } from "@/components/text";
 import { COMPANIES_LIST_QUERY } from "@/graphql/queries";
 import { Company } from "@/graphql/schema.types";
 import { CompaniesListQuery } from "@/graphql/types";
-import { currencyNumber } from "@/utilities";
 import { SearchOutlined } from "@ant-design/icons";
 import { CreateButton, DeleteButton, EditButton, FilterDropdown, List, useTable } from "@refinedev/antd";
 import { HttpError, getDefaultFilter, useGo } from "@refinedev/core";
@@ -101,16 +100,6 @@ export const CompanyList = ({ children }: React.PropsWithChildren) => {
               </Space>
             )}
           />
-          {/* <Table.Column<Company> 
-            dataIndex="totalRevenue"
-            title="Open Deals Amount"
-            render={(value, company) => (
-              <Text>
-                {currencyNumber(company.dealsAggregate?.[0].sum?.value || 0)} 
-                
-              </Text>
-            )}
-          /> */}
           <Table.Column<Company> 
             dataIndex="id"
             title="Actions"

@@ -29,6 +29,7 @@ import { coffeeTheme } from "@/config";
 import { getNameInitials } from "@/utilities";
 import { SaveButton, useForm } from "@refinedev/antd";
 import { UPDATE_CONTACT_MUTATION } from "@/graphql/mutations";
+import { ContactStatus } from "@/components/contacts/status";
 
 const TimezoneEnum = {
   "UTC (Coordinated Universal Time)": "UTC (Coordinated Universal Time)",
@@ -137,7 +138,7 @@ export const ContactShowPage = ({ opened, setOpened, contactId }: Props) => {
 
             <CustomAvatar
               style={{
-                marginRight: "1rem",
+                margin: ".8rem 1rem 2rem",
                 flexShrink: 0,
                 fontSize: "40px",
               }}
@@ -146,11 +147,15 @@ export const ContactShowPage = ({ opened, setOpened, contactId }: Props) => {
               name={getNameInitials(name || "")}
             />
               
+            <div >
+              <ContactStatus contact={queryResult?.data?.data} />
+            </div>
+
             <Form.Item 
               label="Name" 
               name="name"
               style={{
-                marginTop: '1rem'
+                marginBottom: '.8rem'
               }}
             >
               <Input 
@@ -162,6 +167,9 @@ export const ContactShowPage = ({ opened, setOpened, contactId }: Props) => {
             <Form.Item
               label={"Email"}
               name={"email"}
+              style={{
+                marginBottom: '.8rem'
+              }}
             >
               <Input 
                 placeholder={"Email"}
@@ -172,6 +180,9 @@ export const ContactShowPage = ({ opened, setOpened, contactId }: Props) => {
             <Form.Item
               name={"jobTitle"}
               label={"Title"}
+              style={{
+                marginBottom: '.8rem'
+              }}
             >
               <Input 
                 placeholder={"Email"}
@@ -182,6 +193,9 @@ export const ContactShowPage = ({ opened, setOpened, contactId }: Props) => {
             <Form.Item
               name={"phone"}
               label={"Phone"}
+              style={{
+                marginBottom: '.8rem'
+              }}
             >
               <Input 
                 placeholder={"Phone"}
@@ -190,10 +204,10 @@ export const ContactShowPage = ({ opened, setOpened, contactId }: Props) => {
             </Form.Item>
 
             <Form.Item
-              style={{ borderBottom: "none" }}
+              style={{ borderBottom: "none", marginBottom: '.8rem' }}
               name={"timezone"}
               label={"Timezone"}
-              >
+            >
               <Select
                 placeholder={"xxx"}
                 defaultValue={timezone} 
@@ -202,10 +216,6 @@ export const ContactShowPage = ({ opened, setOpened, contactId }: Props) => {
                 options={timezoneOptions}
               />
             </Form.Item>
-
-            {/* <div >
-              <ContactStatus contact={data.data} />
-            </div> */}
 
             <div style={{ 
               display: "flex", 

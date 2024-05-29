@@ -7,6 +7,25 @@ export type UpdateUserMutationVariables = Types.Exact<{
 export type UpdateUserMutation = { updateOneUser: Pick<Types.User, 'id' | 'name' | 'avatarUrl' | 'email' | 'phone' | 'jobTitle'> };
 
 
+export type ContactShowQueryVariables = Types.Exact<{
+  id: Types.Scalars["ID"]["input"];
+}>;
+
+export type ContactShowQuery = {
+  contact: Pick<
+    Types.Contact,
+    | "id"
+    | "name"
+    | "email"
+    | "status"
+    | "jobTitle"
+    | "phone"
+    | "timezone"
+    | "avatarUrl"
+    | "createdAt"
+  >
+}
+
 export type UpdateContactMutationVariables = Types.Exact<{
   input: Types.UpdateOneContactInput;
 }>;
