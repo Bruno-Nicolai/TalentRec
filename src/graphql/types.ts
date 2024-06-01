@@ -46,10 +46,17 @@ export type UpdateContactMutation = {
 };
 
 
+export type CompanyTitleQueryVariables = Types.Exact<{
+  id: Types.Scalars["ID"]["input"];
+}>;
+
+export type CompanyTitleQuery = {
+  company: Pick<Types.Company, "id" | "name" | "createdAt" | "avatarUrl">;
+};
+
 export type CreateCompanyMutationVariables = Types.Exact<{
   input: Types.CreateOneCompanyInput;
 }>;
-
 
 export type CreateCompanyMutation = { createOneCompany: (
     Pick<Types.Company, 'id'>

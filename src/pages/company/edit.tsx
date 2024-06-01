@@ -7,8 +7,9 @@ import { UsersSelectQuery } from '@/graphql/types'
 import { getNameInitials } from '@/utilities'
 import { Edit, useForm, useSelect } from '@refinedev/antd'
 import { GetFieldsFromList } from '@refinedev/nestjs-query'
-import { Col, Form, Input, InputNumber, Row, Select } from 'antd'
+import { Col, Form, Input, InputNumber, Row, Select, Space } from 'antd'
 import { CompanyContactsTable } from './contacts-table'
+import { PictureAndTitle } from '@/components/picture-and-title'
 
 const EditCompanyProfile = () => {
   const { saveButtonProps, formProps, formLoading, queryResult } = useForm({
@@ -44,16 +45,7 @@ const EditCompanyProfile = () => {
               {...formProps}
               layout='vertical'
             >
-              <CustomAvatar 
-                shape="square"
-                src={avatarUrl}
-                name={getNameInitials(name || '')}
-                style={{
-                  width: 96,
-                  height: 96,
-                  marginBottom: '24px',
-                }}
-              />
+              <PictureAndTitle />
               <Form.Item
                   label="Responsible"
                   name="salesOwnerId"

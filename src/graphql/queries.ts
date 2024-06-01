@@ -145,6 +145,16 @@ export const COMPANIES_LIST_QUERY = gql`
   }
 `;
 
+export const COMPANY_TITLE_QUERY = gql`
+    query CompanyTitle($id: ID!) {
+        company(id: $id) {
+            id
+            name
+            avatarUrl
+        }
+    }
+`;
+
 // Query to get users list
 export const USERS_SELECT_QUERY = gql`
   query UsersSelect(
