@@ -22,13 +22,16 @@ const ContactStatusEnum = {
 };
 
 type Props = {
-  contact: GetFields<ContactShowQuery>;
+  contact?: GetFields<ContactShowQuery>;
 };
 
 export const ContactStatus = ({ contact }: Props) => {
   const { mutate } = useUpdate();
+  if (!contact) {
+    return null; // if no contact is provided
+  }
+  
   const { status } = contact;
-
   const updateStatus = (status: string) => {
     mutate({
       resource: "contacts",

@@ -148,7 +148,11 @@ export const ContactShowPage = ({ opened, setOpened, contactId }: Props) => {
             />
               
             <div >
-              <ContactStatus contact={queryResult?.data?.data} />
+              {queryResult?.data?.data?.id ? (
+                <ContactStatus contact={queryResult?.data?.data} />
+              ) : (
+                <p>Loading contact data...</p>
+              )}
             </div>
 
             <Form.Item 
@@ -185,7 +189,7 @@ export const ContactShowPage = ({ opened, setOpened, contactId }: Props) => {
               }}
             >
               <Input 
-                placeholder={"Email"}
+                placeholder={"Title in Company"}
                 addonBefore={<IdcardOutlined />} 
               />
             </Form.Item>
