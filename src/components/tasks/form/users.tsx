@@ -64,6 +64,7 @@ export const UsersForm = ({ initialValues, cancelForm }: Props) => {
     },
     // specify the label for the select component
     optionLabel: "name",
+    optionValue: "id",
   });
 
   return (

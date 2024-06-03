@@ -21,6 +21,7 @@ import TaskList from "./pages/task/list";
 import TaskCreate from "./pages/task/create";
 import TaskEdit from "./pages/task/edit";
 import { coffeeTheme } from "./config";
+import { UpdatePasswordPage } from "./pages/updatePassword";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/update-password" element={<UpdatePasswordPage />} />
               <Route
                 element={
                   <Authenticated
