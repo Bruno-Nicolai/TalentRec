@@ -29,40 +29,37 @@ export const PictureAndTitle = () => {
     },
   });
 
-  const {
-    avatarUrl,
-    name,
-  } = queryResult?.data?.data ?? {}
+  const { avatarUrl, name } = queryResult?.data?.data || {}
 
   return (
     <Form {...formProps}>
-        <Space size={32}>
-            <CustomAvatar 
-                size="large"
-                shape="square"
-                src={avatarUrl}
-                name={getNameInitials(name || '')}
-                style={{
-                    width: 96,
-                    height: 96,
-                    fontSize: 48,
-                    border: "none",
-                    marginBottom: '24px',
-                }}
+      <Space size={32}>
+        <CustomAvatar 
+          size="large"
+          shape="square"
+          src={avatarUrl}
+          name={getNameInitials(name || '')}
+          style={{
+              width: 96,
+              height: 96,
+              fontSize: 48,
+              border: "none",
+              marginBottom: '24px',
+          }}
+        />
+        <Space direction="vertical" size={10}>
+          <Form.Item name="name" required noStyle>
+            <TitleInput
+              loading={queryResult?.isLoading}
+              onChange={(value: string) => {
+                return onFinish?.({
+                  name: value,
+                });
+              }}
             />
-            <Space direction="vertical" size={10}>
-                <Form.Item name="name" required noStyle>
-                    <TitleInput
-                        loading={queryResult?.isLoading}
-                        onChange={(value: string) => {
-                            return onFinish?.({
-                                name: value,
-                            });
-                        }}
-                    />
-                </Form.Item>
-            </Space>
+          </Form.Item>
         </Space>
+      </Space>
     </Form>
   )
 }
@@ -90,19 +87,17 @@ const TitleInput = ({
         onChange,
         triggerType: ["text", "icon"],
         icon: (
-            <EditOutlined 
-                style={{ 
-                    color: "#222", 
-                }} 
-            />
+          <EditOutlined 
+              style={{ 
+                  color: "#222", 
+              }} 
+          />
         ),
       }}
     >
       {loading ? (
         <Skeleton.Input size="small" style={{ width: 200 }} />
-      ) : (
-        value
-      )}
+      ) : (value)}
     </Text>
   );
 };

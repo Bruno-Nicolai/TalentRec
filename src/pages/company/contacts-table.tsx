@@ -47,7 +47,6 @@ export const CompanyContactsTable: FC = () => {
    * https://refine.dev/docs/packages/tanstack-table/use-table/#installation
    */
   const { tableProps, filters, setFilters } = useTable<Contact>({
-    // specify the resource for which the table is to be used
     resource: "contacts",
     syncWithLocation: false,
     // specify initial sorters
@@ -100,12 +99,7 @@ export const CompanyContactsTable: FC = () => {
         },
       ],
     },
-    /**
-     * used to provide any additional information to the data provider.
-     * https://refine.dev/docs/data/hooks/use-form/#meta-
-     */
     meta: {
-      // gqlQuery is used to specify the GraphQL query that should be used to fetch the data.
       gqlQuery: COMPANY_CONTACTS_TABLE_QUERY,
     },
   });
@@ -129,6 +123,9 @@ export const CompanyContactsTable: FC = () => {
   }, [filters]);
 
   const handleRowClick = (record: Contact) => {
+    if (!record) {
+      setSelectedContactId(null);
+    }
     setSelectedContactId(record.id);
     setDrawerOpen(true);
   };
@@ -259,11 +256,13 @@ export const CompanyContactsTable: FC = () => {
           />
         </Table>
       )}
-      <ContactShowPage 
-        opened={drawerOpen} 
-        setOpened={setDrawerOpen} 
-        contactId={selectedContactId} 
-      />
+      {selectedContactId && (
+        <ContactShowPage 
+          opened={drawerOpen} 
+          setOpened={setDrawerOpen} 
+          contactId={selectedContactId} 
+        />
+      )}
     </Card>
   );
 };

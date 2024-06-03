@@ -1,10 +1,8 @@
-import CustomAvatar from '@/components/custom-avatar'
 import SelectOptionWithAvatar from '@/components/select-option-with-avatar'
 import { businessTypeOptions, companySizeOptions, industryOptions } from '@/constants'
 import { UPDATE_COMPANY_MUTATION } from '@/graphql/mutations'
 import { USERS_SELECT_QUERY } from '@/graphql/queries'
 import { UsersSelectQuery } from '@/graphql/types'
-import { getNameInitials } from '@/utilities'
 import { Edit, useForm, useSelect } from '@refinedev/antd'
 import { GetFieldsFromList } from '@refinedev/nestjs-query'
 import { Col, Form, Input, InputNumber, Row, Select, Space } from 'antd'
@@ -12,13 +10,12 @@ import { CompanyContactsTable } from './contacts-table'
 import { PictureAndTitle } from '@/components/picture-and-title'
 
 const EditCompanyProfile = () => {
-  const { saveButtonProps, formProps, formLoading, queryResult } = useForm({
+  const { saveButtonProps, formProps, formLoading } = useForm({
     redirect: false,
     meta: {
       gqlMutation: UPDATE_COMPANY_MUTATION
     },
   })
-  const { avatarUrl, name } = queryResult?.data?.data || {}
   const { selectProps, queryResult: queryResultUsers } = useSelect<GetFieldsFromList<UsersSelectQuery>>({
     resource: 'users',
     optionLabel: 'name',
@@ -52,19 +49,19 @@ const EditCompanyProfile = () => {
                   initialValue={formProps?.initialValues?.salesOwner?.id}
               >
                 <Select 
-                    placeholder="Please choose the process moderator" 
-                    {...selectProps}
-                    options={
-                        queryResultUsers.data?.data.map((user) => ({
-                            value: user.id,
-                            label: (
-                                <SelectOptionWithAvatar 
-                                    name={user.name}
-                                    avatarUrl={user.avatarUrl ?? undefined}
-                                />
-                            )
-                        })) ?? []
-                    }
+                  placeholder="Please choose the process moderator" 
+                  {...selectProps}
+                  options={
+                    queryResultUsers.data?.data.map((user) => ({
+                      value: user.id,
+                      label: (
+                        <SelectOptionWithAvatar 
+                          name={user.name}
+                          avatarUrl={user.avatarUrl ?? undefined}
+                        />
+                      )
+                    })) ?? []
+                  }
                 />
               </Form.Item>
               <Form.Item label="Company Size" name="companySize">
@@ -103,12 +100,12 @@ const EditCompanyProfile = () => {
               <Form.Item label="Country" name="country">
                 <Input placeholder="Country" />
               </Form.Item>
-              <Form.Item label="Company page" name="website">
-                <Input placeholder="Website" />
+              <Form.Item label="Opportunity page" name="website">
+                <Input placeholder="Opportunity link" />
               </Form.Item>
-              <Form.Item label="Opportunity" name="opportunity">
+              {/* <Form.Item label="Opportunity" name="opportunity">
                 <Input placeholder="Opportunity link" defaultValue={"https://my_oportunity.com"} />
-              </Form.Item>
+              </Form.Item> */}
             </Form>
           </Edit>
         </Col>
