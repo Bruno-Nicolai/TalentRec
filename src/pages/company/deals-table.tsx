@@ -1,10 +1,20 @@
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom';
 
-import { COMPANY_DEALS_TABLE_QUERY, COMPANY_TOTAL_DEALS_AMOUNT_QUERY, DEAL_STAGES_SELECT_QUERY, USERS_SELECT_QUERY } from '@/graphql/queries';
-import { CompanyDealsTableQuery, CompanyTotalDealsAmountQuery, DealStagesSelectQuery, UsersSelectQuery } from '@/graphql/types';
-import { EditButton, FilterDropdown, useSelect, useTable } from '@refinedev/antd';
+import { 
+    COMPANY_DEALS_TABLE_QUERY, 
+    COMPANY_TOTAL_DEALS_AMOUNT_QUERY, 
+    DEAL_STAGES_SELECT_QUERY, 
+    USERS_SELECT_QUERY 
+} from '@/graphql/queries';
+import { 
+    CompanyDealsTableQuery, 
+    CompanyTotalDealsAmountQuery, 
+    DealStagesSelectQuery, 
+    UsersSelectQuery 
+} from '@/graphql/types';
 import { GetFields, GetFieldsFromList } from '@refinedev/nestjs-query';
+import { EditButton, FilterDropdown, useSelect, useTable } from '@refinedev/antd';
 
 import { AuditOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons';
 import { Button, Card, Input, Select, Skeleton, Space, Table, Tooltip } from 'antd';
@@ -133,25 +143,32 @@ export const CompanyDealsTable = () => {
           )}
         </>
       }
+      actions={[
+        <div 
+          key="1" 
+          style={{ 
+            display: 'flex', 
+            justifyContent: "flex-end", 
+            margin: "0 2rem",
+          }}
+        >
+          <Button 
+            type="primary" 
+            /* onClick={openCreateNewDealModal} */
+          >
+            Add Deal
+          </Button>
+        </div>
+      ]}
     >
       {!hasData && (
         <Space
           direction="vertical"
-        //   size={64}
           style={{
             padding: 16,
           }}
         >
           <Text>No deals yet</Text>
-          {/* <Link to={listUrl("deals")}>
-            @ts-expect-error Ant Design Icon's v5.0.1 has an issue with @types/react@^18.2.66
-            <PlusCircleOutlined
-              style={{
-                marginRight: 4,
-              }}
-            />{" "}
-            Add deals through sales pipeline
-          </Link> */}
         </Space>
       )}
 
@@ -177,7 +194,7 @@ export const CompanyDealsTable = () => {
           <Table.Column<Deal>
             title="Deal amount"
             dataIndex="value"
-            // sorter
+            sorter
             render={(_, record) => {
               return <Text>{currencyNumber(record.value || 0)}</Text>;
             }}

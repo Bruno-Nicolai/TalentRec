@@ -37,6 +37,9 @@ export const coffeeTheme: ThemeConfig = {
         headerFilterHoverBg: "#FDFDF2",
         colorTextDescription: "#0D0D02",
         rowHoverBg: "#ecdcbe",
+        headerSortHoverBg: "#994F00",
+        bodySortBg: "#FFEDD6",
+        headerSortActiveBg: "#994F00",
       },
       Card: {
         colorBgContainer: "#FED6A9",
