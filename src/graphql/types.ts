@@ -211,6 +211,52 @@ export type CompanyContactsGetCompanyQuery = {
 };
 
 
+export type CompanyDealsTableQueryVariables = Types.Exact<{
+  filter: Types.DealFilter;
+  sorting?: Types.InputMaybe<Array<Types.DealSort> | Types.DealSort>;
+  paging: Types.OffsetPaging;
+}>;
+
+export type CompanyDealsTableQuery = {
+  deals: Pick<Types.DealConnection, "totalCount"> & {
+    nodes: Array<
+      Pick<Types.Deal, "id" | "title" | "value"> & {
+        stage?: Types.Maybe<Pick<Types.DealStage, "id" | "title">>;
+        dealOwner: Pick<Types.User, "id" | "name" | "avatarUrl">;
+        dealContact: Pick<Types.Contact, "id" | "name" | "avatarUrl">;
+      }
+    >;
+  };
+};
+
+export type DealStagesSelectQueryVariables = Types.Exact<{
+  filter: Types.DealStageFilter;
+  sorting?: Types.InputMaybe<Array<Types.DealStageSort> | Types.DealStageSort>;
+  paging: Types.OffsetPaging;
+}>;
+
+export type DealStagesSelectQuery = {
+  dealStages: { nodes: Array<Pick<Types.DealStage, "id" | "title">> };
+};
+
+export type CompanyTotalDealsAmountQueryVariables = Types.Exact<{
+  id: Types.Scalars["ID"]["input"];
+}>;
+
+export type CompanyTotalDealsAmountQuery = {
+  company: {
+    dealsAggregate: Array<{
+      sum?: Types.Maybe<Pick<Types.CompanyDealsSumAggregate, "value">>;
+    }>;
+  };
+};
+
+
+export type CompanyInfoQueryVariables = Types.Exact<{
+  id: Types.Scalars["ID"]["input"];
+}>;
+
+
 export type TaskStagesQueryVariables = Types.Exact<{
   filter: Types.TaskStageFilter;
   sorting?: Types.InputMaybe<Array<Types.TaskStageSort> | Types.TaskStageSort>;

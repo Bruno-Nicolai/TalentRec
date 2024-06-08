@@ -210,6 +210,67 @@ export const COMPANY_CONTACTS_GET_COMPANY_QUERY = gql`
     }
 `;
 
+// Query to get deals list
+export const COMPANY_DEALS_TABLE_QUERY = gql`
+    query CompanyDealsTable(
+        $filter: DealFilter!
+        $sorting: [DealSort!]
+        $paging: OffsetPaging!
+    ) {
+        deals(filter: $filter, sorting: $sorting, paging: $paging) {
+            nodes {
+                id
+                title
+                value
+                stage {
+                    id
+                    title
+                }
+                dealOwner {
+                    id
+                    name
+                    avatarUrl
+                }
+                dealContact {
+                    id
+                    name
+                    avatarUrl
+                }
+            }
+            totalCount
+        }
+    }
+`;
+
+// Query to get company deals total amount
+export const COMPANY_TOTAL_DEALS_AMOUNT_QUERY = gql`
+    query CompanyTotalDealsAmount($id: ID!) {
+        company(id: $id) {
+            dealsAggregate {
+                sum {
+                    value
+                }
+            }
+        }
+    }
+`;
+
+// Query to get deal stages for the select
+export const DEAL_STAGES_SELECT_QUERY = gql`
+    query DealStagesSelect(
+        $filter: DealStageFilter!
+        $sorting: [DealStageSort!]
+        $paging: OffsetPaging!
+    ) {
+        dealStages(filter: $filter, sorting: $sorting, paging: $paging) {
+            nodes {
+                id
+                title
+            }
+        }
+    }
+`;
+
 // Query to get task stages list
 export const TASK_STAGES_QUERY = gql`
   query TaskStages(

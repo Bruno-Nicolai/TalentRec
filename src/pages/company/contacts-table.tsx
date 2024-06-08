@@ -1,3 +1,4 @@
+import { FC, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { FilterDropdown, SaveButton, useTable } from "@refinedev/antd";
@@ -12,7 +13,7 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Button, Card, Col, Form, Input, Row, Select, Space, Table } from "antd";
+import { Button, Card, Col, Form, Input, Row, Select, Space, Table, Tooltip, message } from "antd";
 
 import { statusOptions } from "@/constants";
 import { COMPANY_CONTACTS_GET_COMPANY_QUERY, COMPANY_CONTACTS_TABLE_QUERY } from "@/graphql/queries";
@@ -26,7 +27,6 @@ import {
 import { Text } from "@/components/text";
 import CustomAvatar from "@/components/custom-avatar";
 import { ContactStatusTag } from "@/components/tags/contact-status-tag";
-import { FC, useMemo, useState } from "react";
 import { HttpError, useCreateMany, useOne } from "@refinedev/core";
 import { coffeeTheme } from "@/config";
 import { ContactShowPage } from "./show-contact";
@@ -241,16 +241,47 @@ export const CompanyContactsTable: FC = () => {
             width={112}
             render={(_, record) => (
               <Space>
-                <Button
-                  size="small"
-                  href={`mailto:${record.email}`}
-                  icon={<MailOutlined />}
-                />
-                <Button
-                  size="small"
-                  href={`tel:${record.phone}`}
-                  icon={<PhoneOutlined />}
-                />
+                <Tooltip 
+                  title={
+                    record.email.length > 20 
+                      ? record.email.substring(0, 20) + '...' 
+                      : record.email
+                  } 
+                >
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      navigator.clipboard.writeText(record.email).then(() => {
+                        message.success('Email copied to clipboard!');
+                      }).catch(() => {
+                        message.error('Failed to copy email.');
+                      });
+                    }}
+                    icon={<MailOutlined />}
+                  />
+                </Tooltip>
+                <Tooltip
+                  title={
+                    record.phone && record.phone.length > 20 
+                      ? record.phone.substring(0, 20) + '...' 
+                      : record.phone
+                  } 
+                >
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      if (!record.phone) {
+                        return;
+                      }
+                      navigator.clipboard.writeText(record.phone).then(() => {
+                        message.success('Phone number copied to clipboard!');
+                      }).catch(() => {
+                        message.error('Failed to copy phone number.');
+                      });
+                    }}
+                    icon={<PhoneOutlined />}
+                  />
+                </Tooltip>
               </Space>
             )}
           />

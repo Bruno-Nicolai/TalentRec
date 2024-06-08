@@ -8,6 +8,7 @@ import { GetFieldsFromList } from '@refinedev/nestjs-query'
 import { Col, Form, Input, InputNumber, Row, Select, Space } from 'antd'
 import { CompanyContactsTable } from './contacts-table'
 import { PictureAndTitle } from '@/components/picture-and-title'
+import { CompanyDealsTable } from './deals-table'
 
 const EditCompanyProfile = () => {
   const { saveButtonProps, formProps, formLoading } = useForm({
@@ -103,14 +104,16 @@ const EditCompanyProfile = () => {
               <Form.Item label="Opportunity page" name="website">
                 <Input placeholder="Opportunity link" />
               </Form.Item>
-              {/* <Form.Item label="Opportunity" name="opportunity">
-                <Input placeholder="Opportunity link" defaultValue={"https://my_oportunity.com"} />
-              </Form.Item> */}
             </Form>
           </Edit>
         </Col>
         <Col xs={24} sm={12}>
           <CompanyContactsTable />
+        </Col>
+      </Row>
+      <Row gutter={[32, 32]}>
+        <Col xs={48} sm={24}>
+          <CompanyDealsTable />
         </Col>
       </Row>
     </div>
