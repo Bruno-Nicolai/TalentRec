@@ -11,12 +11,14 @@ import { PictureAndTitle } from '@/components/picture-and-title'
 import { CompanyDealsTable } from './deals-table'
 
 const EditCompanyProfile = () => {
+
   const { saveButtonProps, formProps, formLoading } = useForm({
     redirect: false,
     meta: {
       gqlMutation: UPDATE_COMPANY_MUTATION
     },
   })
+
   const { selectProps, queryResult: queryResultUsers } = useSelect<GetFieldsFromList<UsersSelectQuery>>({
     resource: 'users',
     optionLabel: 'name',
@@ -27,6 +29,9 @@ const EditCompanyProfile = () => {
       gqlQuery: USERS_SELECT_QUERY,
     }
   })
+
+  const companyId = formProps?.initialValues?.id;
+  
   return (
     <div>
       <Row gutter={[32, 32]}>
@@ -113,7 +118,7 @@ const EditCompanyProfile = () => {
       </Row>
       <Row gutter={[32, 32]}>
         <Col xs={48} sm={24}>
-          <CompanyDealsTable />
+          <CompanyDealsTable companyId={companyId} />
         </Col>
       </Row>
     </div>

@@ -210,6 +210,45 @@ export const COMPANY_CONTACTS_GET_COMPANY_QUERY = gql`
     }
 `;
 
+export const CONTACTS_SELECT_QUERY = gql`
+  query ContactsSelect(
+    $filter: ContactFilter!
+    $sorting: [ContactSort!]
+    $paging: OffsetPaging!
+  ) {
+    contacts(filter: $filter, sorting: $sorting, paging: $paging) {
+      nodes {
+        id
+        name
+        avatarUrl
+      }
+    }
+  }
+`;
+
+export const COMPANY_DEALS_COMPANIES_SELECT_QUERY = gql`
+    query SalesCompaniesSelect(
+        $filter: CompanyFilter!
+        $sorting: [CompanySort!]
+        $paging: OffsetPaging!
+    ) {
+        companies(filter: $filter, sorting: $sorting, paging: $paging) {
+            nodes {
+                id
+                name
+                avatarUrl
+                contacts {
+                    nodes {
+                        name
+                        id
+                        avatarUrl
+                    }
+                }
+            }
+        }
+    }
+`;
+
 // Query to get deals list
 export const COMPANY_DEALS_TABLE_QUERY = gql`
     query CompanyDealsTable(

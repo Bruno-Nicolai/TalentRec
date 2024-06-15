@@ -229,14 +229,47 @@ export type CompanyDealsTableQuery = {
   };
 };
 
-export type DealStagesSelectQueryVariables = Types.Exact<{
-  filter: Types.DealStageFilter;
-  sorting?: Types.InputMaybe<Array<Types.DealStageSort> | Types.DealStageSort>;
+export type CompanyDealsModalMutationVariables = Types.Exact<{
+  input: Types.UpdateOneDealInput;
+}>;
+
+export type CompanyDealsModalMutation = {
+  updateOneDeal: Pick<
+    Types.Deal,
+    "id" | "company" | "title" | "value"
+  > & {
+    dealContact?: Types.Maybe<Pick<Types.Contact, "id" | "name" | "avatarUrl">>;
+    dealOwner?: Types.Maybe<Pick<Types.User, "id" | "name" | "avatarUrl">>;
+    stage?: Types.Maybe<Pick<Types.DealStage, "id" | "title">>;
+  };
+};
+
+export type ContactsSelectQueryVariables = Types.Exact<{
+  filter: Types.ContactFilter;
+  sorting?: Types.InputMaybe<Array<Types.ContactSort> | Types.ContactSort>;
   paging: Types.OffsetPaging;
 }>;
 
+export type ContactsSelectQuery = {
+  contacts: {
+    nodes: Array<Pick<Types.Contact, "id" | "name" | "avatarUrl">>;
+  };
+};
+
+export type DealStagesSelectQueryVariables = Types.Exact<{
+  filter: Types.DealStageFilter;
+  sorting?: Types.InputMaybe<Array<Types.DealStageSort> | Types.DealStageSort>;
+  paging?: Types.InputMaybe<Types.OffsetPaging>;
+}>;
+
 export type DealStagesSelectQuery = {
-  dealStages: { nodes: Array<Pick<Types.DealStage, "id" | "title">> };
+  dealStages: Pick<Types.DealStageConnection, "totalCount"> & { 
+    nodes: Array<Pick<Types.DealStage, "id" | "title">> & {
+      dealsAggregate: Array<{
+        sum?: Types.Maybe<Pick<Types.DealStageDealsSumAggregate, "value">>;
+      }>;
+    };       
+  };
 };
 
 export type CompanyTotalDealsAmountQueryVariables = Types.Exact<{
@@ -248,6 +281,24 @@ export type CompanyTotalDealsAmountQuery = {
     dealsAggregate: Array<{
       sum?: Types.Maybe<Pick<Types.CompanyDealsSumAggregate, "value">>;
     }>;
+  };
+};
+
+export type CompanyDealsCompaniesSelectQueryVariables = Types.Exact<{
+  filter: Types.CompanyFilter;
+  sorting?: Types.InputMaybe<Array<Types.CompanySort> | Types.CompanySort>;
+  paging: Types.OffsetPaging;
+}>;
+
+export type CompanyDealsCompaniesSelectQuery = {
+  companies: {
+    nodes: Array<
+      Pick<Types.Company, "id" | "name" | "avatarUrl"> & {
+        contacts: {
+          nodes: Array<Pick<Types.Contact, "name" | "id" | "avatarUrl">>;
+        };
+      }
+    >;
   };
 };
 

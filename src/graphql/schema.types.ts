@@ -1488,24 +1488,24 @@ export type DateFieldComparisonBetween = {
 };
 
 export type Deal = {
-  closeDateDay?: Maybe<Scalars['Int']['output']>;
-  closeDateMonth?: Maybe<Scalars['Int']['output']>;
-  closeDateYear?: Maybe<Scalars['Int']['output']>;
+  id: Scalars['ID']['output'];
+  title: Scalars['String']['output'];
   company: Company;
   companyId: Scalars['ID']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  createdBy: User;
   dealContact: Contact;
   dealOwner: User;
   dealOwnerId: Scalars['ID']['output'];
-  id: Scalars['ID']['output'];
-  notes: Scalars['String']['output'];
   stage?: Maybe<DealStage>;
   stageId?: Maybe<Scalars['ID']['output']>;
-  title: Scalars['String']['output'];
+  value?: Maybe<Scalars['Float']['output']>;
+  createdAt: Scalars['DateTime']['output'];
+  createdBy: User;
   updatedAt: Scalars['DateTime']['output'];
   updatedBy?: Maybe<User>;
-  value?: Maybe<Scalars['Float']['output']>;
+  closeDateDay?: Maybe<Scalars['Int']['output']>;
+  closeDateMonth?: Maybe<Scalars['Int']['output']>;
+  closeDateYear?: Maybe<Scalars['Int']['output']>;
+  notes: Scalars['String']['output'];
 };
 
 export type DealAggregateFilter = {

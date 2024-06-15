@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 import { 
@@ -24,12 +24,19 @@ import { Text } from '@/components/text';
 import { useOne } from '@refinedev/core';
 import { DealStageTag } from '@/components/tags/deal-stage-tag';
 import CustomAvatar from '@/components/custom-avatar';
+import { DealsModal } from './deals-modal';
 
 type Deal = GetFieldsFromList<CompanyDealsTableQuery>;
 
-export const CompanyDealsTable = () => {
+type CompanyDealsTableProps = {
+  companyId: string
+}
+
+export const CompanyDealsTable = ({ companyId }: CompanyDealsTableProps) => {
 
   const params = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentDealId, setCurrentDealId] = useState<string | undefined>();
 
   const { tableProps, filters, setFilters } = useTable<Deal>({
     resource: "deals",
@@ -109,6 +116,16 @@ export const CompanyDealsTable = () => {
     });
   }, [filters]);
 
+  const openCreateNewDealModal = () => {
+    setCurrentDealId(undefined);
+    setIsModalOpen(true);
+  };
+
+  const openEditDealModal = (dealId: string) => {
+    setCurrentDealId(dealId);
+    setIsModalOpen(true);
+  };
+
   return (
     <Card
       style={{ marginTop: 32 }}
@@ -154,7 +171,7 @@ export const CompanyDealsTable = () => {
         >
           <Button 
             type="primary" 
-            /* onClick={openCreateNewDealModal} */
+            onClick={openCreateNewDealModal}
           >
             Add Deal
           </Button>
@@ -259,19 +276,28 @@ export const CompanyDealsTable = () => {
           <Table.Column<Deal>
             dataIndex="id"
             width={18}
-            render={(value) => {
+            render={(_, record) => {
               return (
                 <EditButton
-                  recordItemId={value}
+                  recordItemId={record.id}
                   hideText
                   size="small"
                   resource="deals"
                   icon={<EditOutlined />}
+                  onClick={() => openEditDealModal(record.id)}
                 />
               );
             }}
           />
         </Table>
+      )}
+      {isModalOpen && (
+        <DealsModal
+          opened={isModalOpen}
+          setOpened={setIsModalOpen}
+          dealId={currentDealId}
+          companyId={companyId}
+        />
       )}
     </Card>
   );

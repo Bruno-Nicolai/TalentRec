@@ -68,6 +68,60 @@ export const UPDATE_CONTACT_MUTATION = gql`
   }
 `;
 
+// Mutation to update a deal
+export const CREATE_DEAL_MUTATION = gql`
+  mutation CreateDeal($input: CreateOneDealInput!) {
+    createOneDeal(input: $input) {
+      id
+      title
+      company {
+        id
+        name
+        contacts {
+          nodes {
+            id
+            name
+            avatarUrl
+          }
+        }
+      }
+      stageId
+      value
+      dealOwnerId
+      dealContact {
+        id
+      }
+    }
+  }
+`;
+
+// Mutation to update a deal
+export const UPDATE_DEAL_MUTATION = gql`
+  mutation UpdateDeal($input: UpdateOneDealInput!) {
+    updateOneDeal(input: $input) {
+      id
+      title
+      company {
+        id
+        name
+        contacts {
+          nodes {
+            id
+            name
+            avatarUrl
+          }
+        }
+      }
+      stageId
+      value
+      dealOwnerId
+      dealContact {
+        id
+      }
+    }
+  }
+`;
+
 // Mutation to update task stage of a task
 export const UPDATE_TASK_STAGE_MUTATION = gql`
   mutation UpdateTaskStage($input: UpdateOneTaskInput!) {
