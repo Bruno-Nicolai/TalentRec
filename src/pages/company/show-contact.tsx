@@ -190,6 +190,7 @@ export const ContactShowPage = ({ opened, setOpened, contactId }: Props) => {
             >
               <Input 
                 placeholder={"Title in Company"}
+                maxLength={50}
                 addonBefore={<IdcardOutlined />} 
               />
             </Form.Item>
