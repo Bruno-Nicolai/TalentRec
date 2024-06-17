@@ -114,7 +114,7 @@ export const ContactStatus = ({ contact }: Props) => {
           }}
         >
           <Dropdown
-            arrow
+            // arrow
             trigger={["click"]}
             placement="bottomRight"
             menu={{
@@ -141,7 +141,7 @@ export const ContactStatus = ({ contact }: Props) => {
               }}
             >
               {status === ContactStatusEnum.UNQUALIFIED ? "Unqualified" : "Interested"}
-              <DownOutlined style={{ marginLeft: "0.2rem" }} />
+              {/* <DownOutlined style={{ marginLeft: "0.2rem" }} /> */}
             </a>
           </Dropdown>
         </li>
@@ -180,7 +180,7 @@ export const ContactStatus = ({ contact }: Props) => {
           }}
         >
           <Dropdown
-            arrow
+            // arrow
             trigger={["click"]}
             placement="bottomRight"
             menu={{
@@ -207,7 +207,7 @@ export const ContactStatus = ({ contact }: Props) => {
               }}
             >
               {status === ContactStatusEnum.LOST ? "Lost" : "Negotiation"}
-              <DownOutlined style={{ marginLeft: "0.2rem" }} />
+              {/* <DownOutlined style={{ marginLeft: "0.2rem" }} /> */}
             </a>
           </Dropdown>
         </li>
@@ -223,7 +223,7 @@ export const ContactStatus = ({ contact }: Props) => {
           }}
         >
           <Dropdown
-            arrow
+            // arrow
             trigger={["click"]}
             placement="bottomRight"
             menu={{
@@ -250,7 +250,7 @@ export const ContactStatus = ({ contact }: Props) => {
               }}
             >
               {status === ContactStatusEnum.CHURNED ? "Churned" : "Won"}
-              <DownOutlined style={{ marginLeft: "0.2rem" }} />
+              {/* <DownOutlined style={{ marginLeft: "0.2rem" }} /> */}
             </a>
           </Dropdown>
         </li>

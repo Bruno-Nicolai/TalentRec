@@ -179,6 +179,7 @@ export const CompanyContactsTable: FC = () => {
           rowKey="id"
           onRow={(record) => ({
             onDoubleClick: () => handleRowClick(record),
+            onTouchEnd: () => handleRowClick(record),
           })}
           pagination={{
             ...tableProps.pagination,

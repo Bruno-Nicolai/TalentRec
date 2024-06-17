@@ -50,7 +50,7 @@ const EditCompanyProfile = () => {
             >
               <PictureAndTitle />
               <Form.Item
-                  label="Responsible"
+                  label="Profile Manager"
                   name="salesOwnerId"
                   initialValue={formProps?.initialValues?.salesOwner?.id}
               >
@@ -76,7 +76,7 @@ const EditCompanyProfile = () => {
               <Form.Item label="Niche Market" name="industry">
                 <Select options={ industryOptions } />
               </Form.Item>
-              <Form.Item label="Company Details">
+              {/* <Form.Item label="Company Details">
                 <Input.TextArea 
                   maxLength={800} 
                   autoSize={{ maxRows: 5, }} 
@@ -91,7 +91,7 @@ const EditCompanyProfile = () => {
                   allowClear 
                   defaultValue={"desc desc desc"}
                 />
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item label="Annual Revenue" name="totalRevenue">
                 <InputNumber 
                   autoFocus
@@ -117,7 +117,7 @@ const EditCompanyProfile = () => {
         </Col>
       </Row>
       <Row gutter={[32, 32]}>
-        <Col xs={48} sm={24}>
+        <Col xs={24} sm={24}>
           <CompanyDealsTable companyId={companyId} />
         </Col>
       </Row>

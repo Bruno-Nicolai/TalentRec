@@ -137,7 +137,7 @@ export const CompanyDealsTable = ({ companyId }: CompanyDealsTableProps) => {
       title={
         <Space size="middle">
           <AuditOutlined />
-          <Text>Deals</Text>
+          <Text strong size='md'>Dealings History</Text>
 
           {showResetFilters?.length > 0 && (
             <Button size="small" onClick={() => setFilters([], "replace")}>

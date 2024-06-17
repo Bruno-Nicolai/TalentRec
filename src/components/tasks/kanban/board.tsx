@@ -10,6 +10,7 @@ export const KanbanBoardContainer = ({ children }: React.PropsWithChildren) => {
             display: 'flex',
             justifyContent: 'column',
             margin: '-32px',
+            overflow: 'scroll',
         }}
     >
         <div
@@ -18,7 +19,6 @@ export const KanbanBoardContainer = ({ children }: React.PropsWithChildren) => {
                 height: '100%',
                 display: 'flex',
                 padding: '32px',
-                overflow: 'scroll',
             }}       
         >{children}</div>
     </div>

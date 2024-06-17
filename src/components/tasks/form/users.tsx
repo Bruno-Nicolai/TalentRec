@@ -19,7 +19,7 @@ import { UPDATE_TASK_MUTATION } from "@/graphql/mutations";
 
 type Props = {
   initialValues: {
-    userIds?: { label: string; value: string }[];
+    userIds?: string[];
   };
   cancelForm: () => void;
 };
@@ -29,15 +29,7 @@ export const UsersForm = ({ initialValues, cancelForm }: Props) => {
   const { formProps, saveButtonProps } = useForm<
     GetFields<UpdateTaskMutation>,
     HttpError,
-    /**
-     * Pick is a utility type from typescript that allows you to create a new type from an existing type by picking some properties from it.
-     * https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys
-     *
-     * Pick<Type, Keys>
-     * Type -> the type from which we want to pick the properties
-     * Keys -> the properties that we want to pick
-     */
-    Pick<GetVariables<UpdateTaskMutationVariables>, "userIds">
+    GetVariables<UpdateTaskMutationVariables>
   >({
     queryOptions: {
       // disable the query to prevent fetching data on component mount
@@ -55,16 +47,16 @@ export const UsersForm = ({ initialValues, cancelForm }: Props) => {
   });
 
   // use the useSelect hook to fetch the list of users from the server and display them in a select component
-  const { selectProps } = useSelect<GetFieldsFromList<UsersSelectQuery>>({
+  const { queryResult, selectProps } = useSelect<GetFieldsFromList<UsersSelectQuery>>({
     // specify the resource from which we want to fetch the data
     resource: "users",
+    // specify the label for the select component
+    optionLabel: "name",
+    optionValue: "id",
     // specify the query that should be performed
     meta: {
       gqlQuery: USERS_SELECT_QUERY,
     },
-    // specify the label for the select component
-    optionLabel: "name",
-    optionValue: "id",
   });
 
   return (
@@ -81,10 +73,18 @@ export const UsersForm = ({ initialValues, cancelForm }: Props) => {
         style={{ width: "100%" }}
         initialValues={initialValues}
       >
-        <Form.Item noStyle name="userIds">
+        <Form.Item 
+          noStyle 
+          name={["userIds"]}
+        >
           <Select
             {...selectProps}
-            className="kanban-users-form-select"
+            options={
+              queryResult.data?.data?.map((user) => ({
+                value: user.id,
+                label: user.name
+              })) ?? []
+            }
             dropdownStyle={{ padding: "0px" }}
             style={{ width: "100%" }}
             mode="multiple"

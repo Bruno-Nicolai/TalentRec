@@ -38,6 +38,7 @@ const TaskEdit = () => {
   const { modalProps, close, queryResult } = useModalForm<Task>({
     // specify the action to perform i.e., create or edit
     action: "edit",
+    mutationMode: "optimistic",
     // specify whether the modal should be visible by default
     defaultVisible: true,
     // specify the gql mutation to be performed
@@ -118,12 +119,7 @@ const TaskEdit = () => {
         label="Users"
       >
         <UsersForm
-          initialValues={{
-            userIds: users?.map((user) => ({
-              label: user.name,
-              value: user.id,
-            })),
-          }}
+          initialValues={{ userIds: users?.map((user) => user.id) ?? [] }}
           cancelForm={() => setActiveKey(undefined)}
         />
       </Accordion>

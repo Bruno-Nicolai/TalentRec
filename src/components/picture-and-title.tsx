@@ -86,6 +86,7 @@ const TitleInput = ({
       editable={{
         onChange,
         triggerType: ["text", "icon"],
+        maxLength: 35,
         icon: (
           <EditOutlined 
               style={{ 

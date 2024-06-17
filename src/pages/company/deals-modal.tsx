@@ -39,6 +39,9 @@ export const DealsModal = ({ opened, setOpened, dealId, companyId }: Props) => {
     meta: {
       gqlMutation: isEditMode ? UPDATE_DEAL_MUTATION : CREATE_DEAL_MUTATION,
     },    
+    onMutationSuccess: () => {
+      setOpened(false);
+    }
   });
 
   const { 
