@@ -403,7 +403,7 @@ const ContactForm = () => {
                         rules={[
                           {
                             required: true,
-                            message: "Please provide a contact e-mail",
+                            message: "Please provide the contact e-mail",
                           },
                         ]}
                         name={[name, "email"]}

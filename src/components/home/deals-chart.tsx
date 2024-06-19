@@ -1,18 +1,19 @@
 import { DollarOutlined } from '@ant-design/icons'
 import { Card } from 'antd'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Text } from '../text'
 import { Area, AreaConfig } from '@ant-design/plots'
 import { useList } from '@refinedev/core'
 import { DASHBOARD_DEALS_CHART_QUERY } from '@/graphql/queries'
-import { mapDealsData } from '@/utilities/helpers'
+// import { mapDealsData } from '@/utilities/helpers'
 import { GetFieldsFromList } from '@refinedev/nestjs-query'
 import { DashboardDealsChartQuery } from '@/graphql/types'
 import { coffeeTheme } from '@/config'
+import dayjs from 'dayjs'
 
 const DealsChart = () => {
   
-  const { data } = useList<GetFieldsFromList<DashboardDealsChartQuery>>({
+  const { data, isError, error } = useList<GetFieldsFromList<DashboardDealsChartQuery>>({
     resource: 'dealStages',
     filters: [
       {
@@ -27,26 +28,61 @@ const DealsChart = () => {
   });
 
   const dealData = React.useMemo(() => {
-    return mapDealsData(data?.data);
-  }, [data?.data])
+    // return mapDealsData(data?.data || []);
+
+    const won = data?.data
+      .find((node) => node.title === "WON")
+      ?.dealsAggregate.map((item) => {
+        const { closeDateMonth, closeDateYear } = item.groupBy!;
+        const date = dayjs(`${closeDateYear}-${closeDateMonth}-01`);
+        return {
+          timeUnix: date.unix(),
+          timeText: date.format("MMM YYYY"),
+          value: item.sum?.value,
+          state: "Won",
+        };
+      });
+
+    const lost = data?.data
+      .find((node) => node.title === "LOST")
+      ?.dealsAggregate.map((item) => {
+        const { closeDateMonth, closeDateYear } = item.groupBy!;
+        const date = dayjs(`${closeDateYear}-${closeDateMonth}-01`);
+        return {
+          timeUnix: date.unix(),
+          timeText: date.format("MMM YYYY"),
+          value: item.sum?.value,
+          state: "Lost",
+        };
+      });
+
+    return [...(won || []), ...(lost || [])].sort(
+      (a, b) => a.timeUnix - b.timeUnix,
+    );    
+  }, [data])
+
+  if (isError) {
+    console.error("Error fetching deals chart data", error);
+    return null;
+  }
 
   const config: AreaConfig = {
     
+    isStack: false,
     data: dealData,
     xField: 'timeText',
     yField: 'value',
-    isStack: false,
     seriesField: 'state',
+    animation: true,
     startOnZero: false,
     smooth: true,
-    animation: true,
     legend: {
       offsetY: -8,
     },
     yAxis: {
       tickCount: 6,
       label: {
-        formatter: (v: string) => {
+        formatter: (v) => {
           return `$${Number(v) /1000}k`
         }
       },

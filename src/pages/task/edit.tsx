@@ -119,7 +119,7 @@ const TaskEdit = () => {
         label="Users"
       >
         <UsersForm
-          initialValues={{ userIds: users?.map((user) => user.id) ?? [] }}
+          initialValues={{ userIds: users?.map(user => user.id) ?? [] }}
           cancelForm={() => setActiveKey(undefined)}
         />
       </Accordion>

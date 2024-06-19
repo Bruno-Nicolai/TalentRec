@@ -56,7 +56,7 @@ const Create = () => {
                         <Input placeholder="Please enter a name for the company" />
                     </Form.Item>
                     <Form.Item
-                        label="Responsible"
+                        label="Tracer"
                         name="salesOwnerId"
                         rules={[{required: true}]}
                     >
